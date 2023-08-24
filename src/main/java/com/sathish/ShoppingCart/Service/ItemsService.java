@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemsService {
 
-	private void AddingItemsToCustomer() {
+	public void AddingItemsToCustomer() {
 		
 	}
 }

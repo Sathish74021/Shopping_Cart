@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sathish.ShoppingCart.Dto.MerchantDto;
 import com.sathish.ShoppingCart.Dto.ProductDto;
+import com.sathish.ShoppingCart.Helper.ResponseStructure;
 import com.sathish.ShoppingCart.Service.MerchantService;
 import com.sathish.ShoppingCart.Service.ProductService;
 
@@ -28,7 +29,7 @@ public class Merchant {
 	ProductService productService;
 
 	@PostMapping("/signup")
-	public String CreateMerchant(@RequestBody MerchantDto merchantDto) { // Merchant signup
+	public ResponseStructure<MerchantDto> CreateMerchant(@RequestBody MerchantDto merchantDto) { // Merchant signup
 		return merchantService.CreateMerchant(merchantDto);
 	}
 
@@ -38,7 +39,7 @@ public class Merchant {
 	}
 
 	@PutMapping("/updatemerchant/{id}")
-	public String UpdateMerchantById(@PathVariable int id, @RequestBody MerchantDto merchantDto) { // Updating merchant
+	public ResponseStructure<MerchantDto> UpdateMerchantById(@PathVariable int id, @RequestBody MerchantDto merchantDto) { // Updating merchant
 																									// by using merchant
 																									// ID
 		merchantDto.setId(id);
@@ -46,7 +47,7 @@ public class Merchant {
 	}
 
 	@DeleteMapping("/deletemerchant/{id}")
-	public String DeleteMerchantById(@PathVariable int id) { // Merchant Delete by Merchant ID
+	public ResponseStructure<MerchantDto> DeleteMerchantById(@PathVariable int id) { // Merchant Delete by Merchant ID
 		return merchantService.DeleteMerchantById(id);
 	}
 

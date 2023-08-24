@@ -24,12 +24,17 @@ public class ProductService {
 		return productDao.FetchAllProducts();
 	}
 
-	public Object FetchProductByMerchantId(int merchantid) {
-		Optional<ProductDto> optional= productDao.FetchProductByMerchantId(merchantid);
+	public Object FetchProductBy(int productId) {
+		Optional<ProductDto> optional= productDao.FetchProduct(productId);
 		if (optional.isPresent()) {
 			return optional.get();
 		} else {
            return "products not added";
 		}
+	}
+	
+	public ProductDto fetchProducts(int productId)
+	{
+		return productDao.FetchProduct(productId).get();
 	}
 }

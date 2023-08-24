@@ -23,7 +23,9 @@ public class ProductDao {
        return productRepository.findAll();
 	}
 	
-	public Optional<ProductDto> FetchProductByMerchantId(int merchantid) {
-        return productRepository.findById(merchantid);
+	public Optional<ProductDto> FetchProduct(int productId) {
+        return productRepository.findById(productId);
 	}
+	
+	
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sathish.ShoppingCart.Dto.CartDto;
 import com.sathish.ShoppingCart.Dto.CustomerDto;
+import com.sathish.ShoppingCart.Helper.ResponseStructure;
 import com.sathish.ShoppingCart.Service.CartService;
 import com.sathish.ShoppingCart.Service.CustomerService;
 
@@ -27,36 +27,42 @@ public class Customer {
 	@Autowired
 	CartService cartService;
 
+	//Customer Signup
 	@PostMapping("/signup")
-	public String CreateCustomer(@RequestBody CustomerDto customerDto) {
+	public ResponseStructure<CustomerDto> CreateCustomer(@RequestBody CustomerDto customerDto) {
 		return customerService.CreateCustomer(customerDto);
 	}
-
+    
+	//Customer ID fetching by customer ID
 	@GetMapping("/fetch/{id}")
 	public Object FetchCustomerById(@PathVariable int id) {
 		return customerService.FetchCustomerById(id);
 	}
 
+	//Customer ID details Updating
 	@PutMapping("/updatecustomer/{id}")
-	public String UpdateCustomerById(@PathVariable int id, @RequestBody CustomerDto customerDto) {
+	public ResponseStructure<CustomerDto> UpdateCustomerById(@PathVariable int id, @RequestBody CustomerDto customerDto) {
 		customerDto.setId(id);
 		return customerService.UpdateCustomerById(customerDto);
 	}
-
+    
+	//Customer ID deleting by Customer ID
 	@DeleteMapping("/deletecustomer/{id}")
-	public String DeleteCustomerById(@PathVariable int id) {
+	public Object DeleteCustomerById(@PathVariable int id) {
 		return customerService.DeleteCustomerById(id);
 	}
 	
+	//Fetching all Customer ID's
 	@GetMapping("/fetchallcustomer")
-	public List<CustomerDto> FetchAllCustomer() {
+	public ResponseStructure<List<CustomerDto>> FetchAllCustomer() {
 		return customerService.FetchAllCustomer();
 	}
 	
-	@PostMapping("/addcart/{customerid}")
-	public void AddCart(@RequestBody CartDto cartDto, @PathVariable int customerid) {
-	  customerService.CustomerAddToCart(cartDto,customerid);
-      
+	//Customer Adding Products to their cart with quantity
+	@PostMapping("/addcart/{customerid}/{productid}/{quantity}")
+	public void CustomerAddProductsToCart( @PathVariable int customerid,@PathVariable int productid,@PathVariable int quantity) {
+	   //CustomerDto customerDto= (CustomerDto) customerService.FetchCustomerById(customerid).get();
+	   //customerService.CustomerAddProductsToCart(customerDto,productid,quantity);
 	}
 	
 	public void AddItems() {
